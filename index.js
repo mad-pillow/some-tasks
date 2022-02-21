@@ -10,8 +10,6 @@ if (!Function.prototype.delay) {
 }
 
 foo.delay(3000) // 1 in console after 3 sec
-
-
 // NOTE: Любая новая функция должна иметь возможность быть вызванной через delay
 
 
@@ -36,7 +34,18 @@ const obj = {
   }
 }
 
-function calculate(obj) { ... }
+function calculate(obj) { 
+  return (function helper(obj, acc) {
+    if (!obj.value) {
+      return acc;
+    }
+
+    return helper(obj.obj, acc + obj.value);
+  })(obj, 0);
+}
+ 
+
+console.log(calculate(obj));
 
 // NOTE: Считать нужно рекурсивно, глубину объекта считать как N, то есть бесконечность
 
