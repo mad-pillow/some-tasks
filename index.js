@@ -1,4 +1,6 @@
 // Нужно вызывать любую функцию через delay ...
+//! DONE
+
 function foo() {
   console.log(1)
 }
@@ -10,10 +12,12 @@ if (!Function.prototype.delay) {
 }
 
 foo.delay(3000) // 1 in console after 3 sec
+
 // NOTE: Любая новая функция должна иметь возможность быть вызванной через delay
 
 
 // Посчитать сумму полей value до тех пор, пока они есть в объекте
+//! DONE
 
 const obj = {
   value: 100,
@@ -52,7 +56,23 @@ console.log(calculate(obj));
 
 // Написать простой вариант мемоизации(кеша)
 
-function memoize() { ... }
+function memoize() { 
+  const argsStorage = {};
+
+  function processParams(paramsArr) {
+    return paramsArr.reduce((acc, item) => acc + item, 0);
+  }
+
+  return (...args) => {
+    const passedArgs = JSON.stringify(args);
+
+    if (!argsStorage[passedArgs]) {
+      argsStorage[passedArgs] = processParams(args);
+    }
+
+    return argsStorage[passedArgs];
+  }
+}
 
 const memo1 = memoize()
 
