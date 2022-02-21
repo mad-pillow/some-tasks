@@ -55,6 +55,7 @@ console.log(calculate(obj));
 
 
 // Написать простой вариант мемоизации(кеша)
+//! DONE
 
 function memoize() { 
   const argsStorage = {};
@@ -85,8 +86,26 @@ memo1(1, 2, 3) // Got this value in cash -> 6
 
 
 // Найти число Фибоначчи под определенным номером
+//! DONE
 
-function fibonacci(num) { ... }
+function fibonacci(num) { 
+  const startWith = 1;
+  let count = 1;
+  let prev = 0;
+
+  return (function helper(cur) {
+    ++count;
+    
+    if (count > num) {
+      return prev;
+    }
+
+    const next = prev + cur;
+    prev = cur;  
+
+    return helper(next);
+  })(startWith);
+}
 
 fibonacci(3) // 1
 fibonacci(4) // 2
