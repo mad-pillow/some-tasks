@@ -112,17 +112,17 @@ fibonacci(6); // 5
 // Написать полифилл оператора new
 //! DONE
 
-// // The shortest solution below
-// function _new(constructor, ...args) {
-//   return Reflect.construct(constructor, args);
-// }
-
-// Another short solution below
+// The shortest solution below (see another solution below this one)
 function _new(constructor, ...args) {
-  let obj = {};
-  Object.setPrototypeOf(obj, constructor.prototype);
-  return constructor.apply(obj, args) || obj;
+  return Reflect.construct(constructor, args);
 }
+
+// // Another short solution below
+// function _new(constructor, ...args) {
+//   let obj = {};
+//   Object.setPrototypeOf(obj, constructor.prototype);
+//   return constructor.apply(obj, args) || obj;
+// }
 
 function Person(name, age) {
   this.name = name;
